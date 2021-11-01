@@ -3,6 +3,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -38,15 +39,21 @@ public class changePasFrame extends JFrame{
                         .build();
                 MongoClient mongoClient = MongoClients.create(settings);
                 MongoDatabase db = mongoClient.getDatabase("CargoApp");
-                MongoCollection<Document> collection = db.getCollection("User");
-                Document document = new Document("username",userField.getText()).append("password",pasFieldNew.getText());
 
-                Bson filterId = Filters.eq("_id",new ObjectId(objectid));
-                Bson filter = Filters.eq("username",userField.getText());
-                Bson filterpas = Filters.eq("password",pasFieldOld.getText());
+                BasicDBObject newDocument = new BasicDBObject();
+                newDocument.put("username",userField.getText());
+                newDocument.put("password",pasFieldNew.getText());
+
+                BasicDBObject query = new BasicDBObject();
+                query.put("_id",new ObjectId(objectid));
 
 
-                collection.updateOne(Filters.and(filterId,filter,filterpas),document);
+                BasicDBObject updateOjbect = new BasicDBObject();
+                updateOjbect.put("$set",newDocument);
+//                updateOjbect.put("password",pasFieldNew.getText());
+                db.getCollection("User").updateOne(query, updateOjbect);
+
+
                 frame.setVisible(false);
 
             }
