@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jxmaps-1.3.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/req/jxmaps-1.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/req/jxmaps-win-1.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/req/jxmapsdemo.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
